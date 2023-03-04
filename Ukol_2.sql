@@ -1,18 +1,16 @@
 DECLARE @produktID INT
-DECLARE @produktnazev VARCHAR(50)
-DECLARE @produktskryty BIT
 DECLARE @parametrProduktID INT
 DECLARE @parametrID INT
 DECLARE @parametrnazev VARCHAR(50)
 
 DECLARE produkt_cursor CURSOR FOR
-SELECT ProduktID, Produkt_nazev, produkt_skryty
+SELECT ProduktID
 FROM Produkty
 WHERE produkt_skryty = 0
 
 OPEN produkt_cursor
 
-FETCH NEXT FROM produkt_cursor INTO @produktID, @produktnazev, @produktskryty
+FETCH NEXT FROM produkt_cursor INTO @produktID
 
 WHILE @@FETCH_STATUS = 0
 BEGIN
@@ -32,7 +30,7 @@ BEGIN
         WHERE parametrproduktID = @produktID
     END
 
-    FETCH NEXT FROM product_cursor INTO @produktID, @produktnazev, @productskryty
+    FETCH NEXT FROM product_cursor INTO @produktID
 END
 
 CLOSE produkt_cursor
